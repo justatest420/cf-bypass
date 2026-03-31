@@ -1,0 +1,23 @@
+app = "cf-bypass"
+
+[build]
+  # Specifies your Dockerfile (see the example below)
+  dockerfile = "Dockerfile"
+
+[env]
+  # Tells Puppeteer to store its files in the writable /home volume
+  PUPPETEER_CACHE_DIR = "/home/puppeteer_cache"
+  # Prevents Puppeteer from downloading a new browser if it exists
+  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "false"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[mounts]]
+  # Creates a 1GB persistent volume for Chromium
+  source = "puppeteer_data"
+  destination = "/home"
